@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.UI;
+using UnityEditor;
 
 public class StartMenuManager : MonoBehaviour
 {
@@ -18,8 +18,22 @@ public class StartMenuManager : MonoBehaviour
         
     }
 
+    public void SetPlayerName(string playerName)
+    {
+        DataManager.Instance.PlayerName = playerName;
+    }
+
     public void StartGame()
     {
         SceneManager.LoadScene(1);
+    }
+
+    public void QuitGame()
+    {
+#if UNITY_EDITOR
+        EditorApplication.ExitPlaymode();
+#else
+        Application.Quit();
+#endif
     }
 }
