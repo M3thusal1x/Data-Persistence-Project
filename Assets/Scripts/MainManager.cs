@@ -10,6 +10,7 @@ public class MainManager : MonoBehaviour
     public int LineCount = 6;
     public Rigidbody Ball;
 
+    public Text BestScoreText;
     public Text ScoreText;
     public GameObject GameOverText;
     
@@ -22,6 +23,7 @@ public class MainManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        BestScoreText.text = $"Best Score : {DataManager.Instance.HighScoreName} : {DataManager.Instance.HighScore}";
         ScoreText.text = $"Score {DataManager.Instance.PlayerName} : 0";
 
         const float step = 0.6f;
