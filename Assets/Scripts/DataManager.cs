@@ -40,8 +40,9 @@ public class DataManager : MonoBehaviour
         data.HighScore = HighScore;
 
         string json = JsonUtility.ToJson(data);
+        string path = Application.persistentDataPath + "/savefile.json";
 
-        File.WriteAllText(Application.persistentDataPath + "/savefile.json", json);
+        File.WriteAllText(path, json);
     }
 
     public void Load()
@@ -57,5 +58,25 @@ public class DataManager : MonoBehaviour
             HighScoreName = data.HighScoreName;
             HighScore = data.HighScore;
         }
+    }
+
+    public void UpdateData(int score)
+    {
+        if (IsNewHighScore(score))
+        {
+            SetNewHighScore(PlayerName, score);
+            Save();
+        }
+    }
+
+    private bool IsNewHighScore(int score)
+    {
+        return score > HighScore;
+    }
+
+    private void SetNewHighScore(string playerName, int score)
+    {
+        HighScoreName = playerName;
+        HighScore = score;
     }
 }
